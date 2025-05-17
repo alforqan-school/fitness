@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Coach Chat</title>
+  <body>
+    <link rel="stylesheet" href="styles.css" /> 
+
+    <script src="https://kit.fontawesome.com/69611218f6.js" crossorigin="anonymous"></script>
+    <div class="top-nav" id="topnav">
+        <a href="index.html" class="home"><span>Fit</span><span id="pro">Pro</span></a>
+        <a href="diet.html">Diet</a>
+        <a href="workout.html">Work out</a>
+        <a href="bmi.html">BMI</abbr></a>
+        <a href="">Coach</a> 
+        <a href="#">Chat Ai</a> 
+        <a href="#">Why do we care about health and fittnes </a>
+        <a href="#"><i class="fa-solid fa-right-to-bracket"></i>  Login or signup</a>
+        <a href="javascript:void(0)" class="icon" onclick="show()"><i class="fa-solid fa-bars"></i></a>
+      </div>
+  </body>
+  <style>
+    /* === BASE STYLES === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0f2c; /* Dark blue/black */
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      width: 100%;
+      margin: auto;
+      background-color: #1a1f3c;
+      border: 2px solid #66b2ff;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background-color: #1a1f3c;
+      padding: 20px;
+      font-size: 1.3rem;
+      text-align: center;
+      border-bottom: 2px solid #66b2ff;
+    }
+
+    .chat-box {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #0a0f2c;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 10px 15px;
+      border-radius: 6px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      background-color: #292e4d;
+      align-self: flex-end;
+      color: #fff;
+      margin-left: auto;
+      border-top-right-radius: 0;
+    }
+
+    .coach-message {
+      background-color: #66b2ff;
+      color: #000;
+      align-self: flex-start;
+      border-top-left-radius: 0;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 15px;
+      background-color: #1a1f3c;
+      border-top: 2px solid #66b2ff;
+    }
+
+    .chat-input input {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: #292e4d;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .chat-input button {
+      background-color: #66b2ff;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .chat-input button:hover {
+      background-color: #3399ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="chat-header">🤖 AI Coach</div>
+
+    <div class="chat-box" id="chat-box">
+      <!-- Initial message -->
+      <div class="message coach-message">Hi! I'm your AI Fitness Coach. Ask me anything about workouts or nutrition!</div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Ask your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+
+    function appendMessage(sender, text) {
+      const div = document.createElement("div");
+      div.classList.add("message");
+      div.classList.add(sender === "user" ? "user-message" : "coach-message");
+      div.innerHTML = `<div>${text}</div>`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      appendMessage("user", msg);
+      input.value = "";
+
+      setTimeout(() => {
+        const reply = generateCoachReply(msg);
+        appendMessage("coach", reply);
+      }, 800);
+    }
+
+    function generateCoachReply(userMsg) {
+      const lower = userMsg.toLowerCase();
+
+      // Keywords for smart responses
+      if (lower.includes("hiit")) {
+        return "HIIT is great for fat burn! Try 30 seconds hard, 30 seconds rest.";
+      } else if (lower.includes("strength") || lower.includes("lift")) {
+        return "Focus on compound lifts like squats, deadlifts, and bench press!";
+      } else if (lower.includes("core") || lower.includes("flexibility")) {
+        return "Try planks, Russian twists, and daily stretching for core & flexibility.";
+      } else if (lower.includes("diet") || lower.includes("nutrition")) {
+        return "Eat lean proteins, complex carbs, and healthy fats. Stay hydrated!";
+      } else if (lower.includes("hello") || lower.includes("hi")) {
+        return "Hello! How can I help you today?";
+      } else if (lower.includes("plan") || lower.includes("workout")) {
+        return "Would you like a sample workout plan? Just say yes!";
+      } else if (lower.includes("yes") || lower.includes("sure")) {
+        return "Here’s a quick full-body routine:\n1. Push-ups – 3x10\n2. Squats – 3x12\n3. Plank – 3x30s";
+      } else {
+        return "Good question! Let me think... Keep asking!";
+      }
+    }
+  </script>
+
+</body>
+</html>
