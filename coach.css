@@ -1,0 +1,82 @@
+/* === BASE STYLES === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #0a0f2c; /* Dark blue/black */
+    color: #ffffff;
+    
+    line-height: 1.6;
+ 
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #66b2ff; /* Light blue title */
+    font-size: 2rem;
+  }
+  
+  .cube-card {
+    background-color: #1a1f3c;
+    border-radius: 12px; /* Rounded square cubes */
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 2px solid transparent;
+  }
+  
+  .cube-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(102, 178, 255, 0.3);
+  }
+  
+  .cube-card.selected {
+    background-color: #66b2ff; /* Light blue when selected */
+    color: #000;
+    border-color: #3399ff;
+    box-shadow: 0 6px 15px rgba(102, 178, 255, 0.5);
+  }
+  
+  .card-name {
+    font-size: 1.3rem;
+    color: #66b2ff;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+  }
+  
+  .cube-card.selected .card-name {
+    color: #000;
+  }
+  
+  .card-type {
+    font-size: 1rem;
+    color: #cccccc;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+  }
+  
+  .cube-card.selected .card-type {
+    color: #000;
+  }
+  
+  .card-time {
+    font-size: 0.95rem;
+    color: #aaa;
+    transition: color 0.3s ease;
+  }
+  
+  .cube-card.selected .card-time {
+    color: #000;
+  }
